@@ -61,7 +61,7 @@
     --h4-size: clamp(1.25rem, 2.5vw, 1.875rem);
     --h5-size: clamp(1.125rem, 2vw, 1.5rem);
 
-    --p-size: clamp(1rem, 1vw, 1.1rem);
+    --p-size: clamp(1rem, 3vw, 1.125rem);
     --small-size: clamp(0.8rem, 0.9vw, 0.95rem);
 
     /* LINE HEIGHTS */
