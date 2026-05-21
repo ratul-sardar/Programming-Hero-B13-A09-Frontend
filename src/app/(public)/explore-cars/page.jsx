@@ -1,19 +1,16 @@
-import { CarSearchFilter } from "@/components/CarSearchFilter";
+import { getAllCars } from "@/api/getApi";
 
-export default function ExploreCars() {
+export default async function ExploreCars() {
+  const allCars = await getAllCars();
   return (
     <>
       <section className="">
         <div className="cssContainer">
-          <CarSearchFilter
-            searchValue={searchValue}
-            setsearchValue={setsearchValue}
-          ></CarSearchFilter>
-          {/* {allCars.map((car) => (
+          {allCars.map((car) => (
             <p key={car._id} className="">
               {car.carName}
             </p>
-          ))}*/}
+          ))}
         </div>
       </section>
     </>

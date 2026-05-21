@@ -1,5 +1,6 @@
 import "./globals.css";
 import { satoshi, inter } from "./fonts";
+import { Navbar } from "@/components/shared/Navbar/Navbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       className={`${satoshi.variable} ${inter.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
+        <Navbar></Navbar>
         {children}
       </body>
     </html>
