@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import PrimaryCta from "../CTA Buttons/PrimaryCTA/PrimaryCta";
+import SecondaryCta from "../CTA Buttons/SecondaryCta/SecondaryCta";
+import Link from "next/link";
 
 const links = [
   { label: "Home", href: "#home" },
@@ -16,34 +19,29 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <div className="site-container flex h-16 items-center justify-between md:h-20">
-        <a
-          href="#home"
+    <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur supports-backdrop-filter:bg-background/70">
+      <div className="cssContainer p-0 flex h-16 items-center justify-between md:h-20">
+        <Link
+          href="/"
           className="font-sans text-xl font-black tracking-tight text-foreground"
         >
-          Drive<span className="text-primary">Fleet</span>
-        </a>
+          Drive<span className="text-accent">Fleet</span>
+        </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {links.map((l) => (
-            <a
+            <Link
               key={l.label}
               href={l.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              className="text-sm font-medium text-foreground/80 transition-colors hover:text-accent"
             >
               {l.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <button className="text-sm font-semibold text-foreground transition-opacity hover:opacity-70">
-            Login
-          </button>
-          <button className="rounded-[var(--radius)] bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5">
-            Get Started
-          </button>
+        <div className="hidden text-sm font-semibold items-center gap-3 lg:flex">
+          <CtaButtons />
         </div>
 
         <button
@@ -57,28 +55,36 @@ export function Navbar() {
 
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
-          <div className="site-container flex flex-col gap-1 py-4">
+          <div className="cssContainer p-0 flex flex-col gap-1 py-4">
             {links.map((l) => (
-              <a
+              <Link
                 key={l.label}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="rounded-[var(--radius)] px-2 py-3 text-base font-medium text-foreground hover:bg-muted"
+                className="rounded-(--radius) px-2 py-3 text-base font-medium text-foreground hover:bg-muted"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             <div className="mt-2 flex gap-3 pt-2">
-              <button className="flex-1 rounded-[var(--radius)] border border-border px-4 py-2.5 text-sm font-semibold">
-                Login
-              </button>
-              <button className="flex-1 rounded-[var(--radius)] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground">
-                Get Started
-              </button>
+              <CtaButtons />
             </div>
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+function CtaButtons() {
+  return (
+    <>
+      <SecondaryCta link={`/`} className={``}>
+        Login
+      </SecondaryCta>
+      <PrimaryCta link={`/`} className={``}>
+        Get Started!
+      </PrimaryCta>
+    </>
   );
 }
