@@ -34,10 +34,10 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-3 lg:justify-end">
-            <SecondaryCta link="/" className={` hover:gap-4`}>
+            <SecondaryCta link="/" className={``}>
               Add Cars <PlusIcon className="size-4"></PlusIcon>
             </SecondaryCta>
-            <PrimaryCta link="/" className={` hover:gap-4`}>
+            <PrimaryCta link="/" className={``}>
               Explore Cars <ArrowUpRight className="size-4" />
             </PrimaryCta>
           </div>
