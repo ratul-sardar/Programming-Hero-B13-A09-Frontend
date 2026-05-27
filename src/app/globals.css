@@ -118,8 +118,8 @@ body {
     font-size: var(--p-size);
     line-height: var(--body-line-height);
     font-weight: 400;
-    color: #111111;
-    background: #ffffff;
+    background-color: var(--background);
+    color: var(--color-foreground);
 }
 
 /* HEADINGS */
@@ -189,16 +189,16 @@ p {
 /* UTILITY CLASSES */
 
 .hero-title {
-    font-size: clamp(4rem, 9vw, 9rem);
+    font-size: clamp(4rem, 9vw, 7.5rem);
     font-weight: 900;
     line-height: 1.1;
     letter-spacing: -0.07em;
 }
 
 .section-title {
-    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
-    line-height: 0.95;
+    line-height: 1;
     letter-spacing: -0.05em;
 }
 
@@ -206,6 +206,17 @@ p {
     font-size: clamp(1.25rem, 2vw, 1.75rem);
     font-weight: 700;
     line-height: 1.1;
+}
+
+@layer base {
+    * {
+        border-color: var(--color-border);
+    }
+
+    html {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
 }
 
 @layer components {
