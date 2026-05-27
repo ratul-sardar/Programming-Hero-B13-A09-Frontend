@@ -9,10 +9,11 @@ import Link from "next/link";
 const links = [
   { label: "Home", href: "/" },
   { label: "Explore Cars", href: "/" },
-  { label: "Luxury Collection", href: "/" },
-  { label: "Deals", href: "/" },
-  { label: "About", href: "/" },
-  { label: "Contact", href: "/" },
+  { label: "Add Car", href: "/" },
+  { label: "My Bookings", href: "/" },
+  // ,
+  // { label: "About", href: "/" },
+  // { label: "Contact", href: "/" },
 ];
 
 export function Navbar() {

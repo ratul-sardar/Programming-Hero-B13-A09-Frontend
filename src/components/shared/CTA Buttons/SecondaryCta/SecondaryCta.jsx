@@ -10,7 +10,7 @@ export default function SecondaryCta({
     <Link href={link}>
       <Button
         variant="outline"
-        className={`rounded-(--radius) font-semibold ${className}`}
+        className={`h-auto rounded-(--radius) font-semibold px-6 py-3.5 ${className}`}
       >
         {children}
       </Button>

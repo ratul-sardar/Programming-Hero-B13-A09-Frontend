@@ -7,8 +7,10 @@ export default function PrimaryCta({
   className,
 }) {
   return (
-    <Link href={link}>
-      <Button className={`rounded-(--radius) font-semibold ${className}`}>
+    <Link href={link} className="">
+      <Button
+        className={`h-auto rounded-(--radius) font-semibold px-6 py-3.5 ${className}`}
+      >
         {children}
       </Button>
     </Link>
