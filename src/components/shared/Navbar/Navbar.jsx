@@ -7,12 +7,12 @@ import SecondaryCta from "../CTA Buttons/SecondaryCta/SecondaryCta";
 import Link from "next/link";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "Explore Cars", href: "#cars" },
-  { label: "Luxury Collection", href: "#cars" },
-  { label: "Deals", href: "#features" },
-  { label: "About", href: "#why" },
-  { label: "Contact", href: "#footer" },
+  { label: "Home", href: "/" },
+  { label: "Explore Cars", href: "/" },
+  { label: "Luxury Collection", href: "/" },
+  { label: "Deals", href: "/" },
+  { label: "About", href: "/" },
+  { label: "Contact", href: "/" },
 ];
 
 export function Navbar() {

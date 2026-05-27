@@ -1,6 +1,7 @@
 import "./globals.css";
 import { satoshi, inter } from "./fonts";
 import { Navbar } from "@/components/shared/Navbar/Navbar";
+import { Footer } from "@/components/shared/Footer/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning className="min-h-full flex flex-col">
         <Navbar></Navbar>
         {children}
+        <Footer></Footer>
       </body>
     </html>
   );
