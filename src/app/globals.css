@@ -223,4 +223,8 @@ p {
     .cssContainer {
         @apply w-11/12 max-w-360 mx-auto py-15 md:py-20 lg:py-25 xl:py-30;
     }
+
+    .cardBadge {
+        @apply border border-border px-2.5 py-1 text-xs font-medium text-foreground/80;
+    }
 }
