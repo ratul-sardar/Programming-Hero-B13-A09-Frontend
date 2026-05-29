@@ -16,3 +16,10 @@ export async function getAllCars(search = "", type = "") {
 
   return data;
 }
+
+// To get data of a single cars
+export async function getCarData(id) {
+  const res = await fetch(`${process.env.SERVER_URI}/explore-cars/${id}`);
+  const data = await res.json();
+  return data;
+}

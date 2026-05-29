@@ -5,12 +5,13 @@ export default function SecondaryCta({
   link = `/`,
   children = "SecondaryCta!",
   className,
+  fullWidth = false,
 }) {
   return (
-    <Link href={link}>
+    <Link href={link} className={`${fullWidth && "w-full"}`}>
       <Button
         variant="outline"
-        className={`h-auto rounded-(--radius) font-semibold px-6 py-3.5 ${className}`}
+        className={`h-auto rounded-(--radius) font-semibold px-6 py-3.5 ${className} ${fullWidth && "w-full"} `}
       >
         {children}
       </Button>

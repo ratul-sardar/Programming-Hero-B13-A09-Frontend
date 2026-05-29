@@ -3,6 +3,7 @@ import PrimaryCta from "@/components/shared/CTA Buttons/PrimaryCTA/PrimaryCta";
 import { ArrowUpRight, MapPin } from "lucide-react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 // {
 // "_id": "6a0a7cda18390593347443df",
@@ -92,9 +93,12 @@ export async function FeaturedCars() {
                       / day
                     </span>
                   </div>
-                  <button className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent transition-transform hover:translate-x-0.5">
+                  <Link
+                    href={`/explore-cars/${c._id}`}
+                    className="flex items-center gap-1.5 text-sm font-semibold text-accent transition-transform hover:translate-x-0.5"
+                  >
                     View Details <ArrowUpRight className="size-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>
