@@ -17,15 +17,9 @@ export function CTASection() {
             way to rent cars with DriveFleet.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <PrimaryCta link="" className={``}>
+            <PrimaryCta link="/explore-cars" className={``}>
               Explore Cars
             </PrimaryCta>
-            <SecondaryCta
-              link=""
-              className={`text-white hover:bg-background/10!`}
-            >
-              Create Account
-            </SecondaryCta>
           </div>
         </div>
       </div>
