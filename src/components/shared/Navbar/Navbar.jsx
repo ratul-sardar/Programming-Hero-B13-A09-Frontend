@@ -83,8 +83,8 @@ function CtaButtons() {
       <SecondaryCta link={`/login`} className={``}>
         Login
       </SecondaryCta>
-      <PrimaryCta link={`/`} className={``}>
-        Get Started!
+      <PrimaryCta link={`/sign-up`} className={``}>
+        Sign Up
       </PrimaryCta>
     </>
   );
