@@ -1,4 +1,7 @@
 import { SignUpForm } from "@/components/ui/auth/sign-up/SignUpForm";
+import { Button } from "@heroui/react";
+import Link from "next/link";
+import { BsGoogle } from "react-icons/bs";
 
 export default function Login() {
   return (
@@ -7,8 +10,24 @@ export default function Login() {
         <div className="cssContainer flex flex-col gap-12 items-center ">
           <h1 className="">Register</h1>
 
-          <div className="w-full flex flex-col max-w-130  bg-white rounded-(--field-radius) p-6 ">
+          <div className="w-full flex flex-col gap-5 max-w-130  bg-white rounded-(--field-radius) p-8 ">
             <SignUpForm />
+
+            {/* Social Login*/}
+            <div className="space-y-3">
+              <p className="text-center text-sm!">Or Register With</p>
+              <Button variant="outline" className={`text-accent w-full`}>
+                <BsGoogle /> Google
+              </Button>
+            </div>
+
+            {/* Link to Login page*/}
+            <p className="text-sm! text-center">
+              Already Have an account?{" "}
+              <Link href={`/login`} className="text-blue-500">
+                Login here
+              </Link>
+            </p>
           </div>
         </div>
       </section>

@@ -27,6 +27,25 @@ export function SignUpForm() {
 
   return (
     <Form className="flex w-full flex-col gap-4" onSubmit={onSubmit}>
+      {/* Name */}
+      <TextField
+        isRequired
+        name="name"
+        type="text"
+        validate={(value) => {
+          if (value.length < 3) {
+            return "Name must me at least 3 letters";
+          }
+
+          return null;
+        }}
+      >
+        <Label>Full Name</Label>
+        <Input placeholder="Shopify Bashar" />
+        <FieldError />
+      </TextField>
+
+      {/* Email*/}
       <TextField
         isRequired
         name="email"
@@ -42,6 +61,14 @@ export function SignUpForm() {
         <Label>Email</Label>
         <Input placeholder="john@example.com" />
         <FieldError />
+      </TextField>
+
+      {/* Photo Url */}
+      <TextField isRequired name="Photo Url" type="text">
+        <Label>Photo Url</Label>
+        <Input
+          placeholder={`https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
+        />
       </TextField>
 
       <TextField
