@@ -2,6 +2,7 @@ import "./globals.css";
 import { satoshi, inter } from "./fonts";
 import { Navbar } from "@/components/shared/Navbar/Navbar";
 import { Footer } from "@/components/shared/Footer/Footer";
+import { Bounce, ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Create Next App",
@@ -18,6 +19,19 @@ export default function RootLayout({ children }) {
         <Navbar></Navbar>
         {children}
         <Footer></Footer>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+        />
       </body>
     </html>
   );

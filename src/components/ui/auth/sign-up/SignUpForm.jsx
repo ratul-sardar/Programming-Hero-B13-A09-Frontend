@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 // import { Check } from "@gravity-ui/icons";
 import {
   Button,
@@ -10,19 +11,28 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import Router from "next/router";
+import { toast } from "react-toastify";
 
 export function SignUpForm() {
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = {};
+    const form = Object.fromEntries(formData);
+    const { name, email, PhotoUrl, password } = form;
 
-    // Convert FormData to plain object
-    formData.forEach((value, key) => {
-      data[key] = value.toString();
+    const { data, error } = await authClient.signUp.email({
+      name, // required
+      email, // required
+      password, // required
+      image: PhotoUrl,
+      callbackURL: "/",
     });
 
-    alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+    if (data) {
+      toast.success("Success! Loggin you in.......");
+      Router.push("/");
+    } else toast.error(error.message);
   };
 
   return (
@@ -64,7 +74,7 @@ export function SignUpForm() {
       </TextField>
 
       {/* Photo Url */}
-      <TextField isRequired name="Photo Url" type="text">
+      <TextField name="PhotoUrl" type="text">
         <Label>Photo Url</Label>
         <Input
           placeholder={`https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
