@@ -5,19 +5,22 @@ import { Menu, X } from "lucide-react";
 import PrimaryCta from "../CTA Buttons/PrimaryCTA/PrimaryCta";
 import SecondaryCta from "../CTA Buttons/SecondaryCta/SecondaryCta";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "Explore Cars", href: "/explore-cars" },
   { label: "Add Car", href: "/add-cars" },
   { label: "My Bookings", href: "/my-bookings" },
-  // ,
-  // { label: "About", href: "/" },
-  // { label: "Contact", href: "/" },
 ];
 
 export function Navbar() {
+  // State for the mobile navbar
   const [open, setOpen] = useState(false);
+
+  const { data: session } = authClient.useSession();
+
+  console.log(session);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur supports-backdrop-filter:bg-background/70">
