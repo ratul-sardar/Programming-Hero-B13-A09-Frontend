@@ -1,3 +1,4 @@
+import GoogleLogin from "@/components/shared/CTA Buttons/GoogleLogin/GoogleLogin";
 import { SignUpForm } from "@/components/ui/auth/sign-up/SignUpForm";
 import { Button } from "@heroui/react";
 import Link from "next/link";
@@ -16,9 +17,7 @@ export default function Login() {
             {/* Social Login*/}
             <div className="space-y-3">
               <p className="text-center text-sm!">Or Register With</p>
-              <Button variant="outline" className={`text-accent w-full`}>
-                <BsGoogle /> Google
-              </Button>
+              <GoogleLogin />
             </div>
 
             {/* Link to Login page*/}
