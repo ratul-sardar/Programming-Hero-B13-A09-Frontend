@@ -46,7 +46,7 @@ export function LoginForm() {
         }}
       >
         <Label>Email</Label>
-        <Input placeholder="john@example.com" />
+        <Input placeholder="shopifybashar@gulshan.com" />
         <FieldError />
       </TextField>
 
