@@ -74,7 +74,7 @@ export function Navbar() {
 
           {/* Profile details modal*/}
           {showProfile && (
-            <div className="absolute top-[172%] right-[2%] bg-white p-4 rounded-[--field-radius] flex flex-col gap-2 ">
+            <div className="absolute top-[172%] right-[2%] bg-white p-6 rounded-(--field-radius) flex flex-col gap-3 ">
               <UserInfo session={session}></UserInfo>
             </div>
           )}
@@ -107,8 +107,21 @@ export function Navbar() {
             ))}
 
             {/* Cta*/}
-            <div className="mt-2 flex gap-3 pt-2">
-              {session ? <p>{session?.user?.name}</p> : <CtaButtons />}
+            <div className="mt-2 flex gap-3 pt-3">
+              {session ? (
+                <div className="flex flex-col gap-2 p-3 ">
+                  <Image
+                    src={profileImage}
+                    width={40}
+                    height={40}
+                    alt="hi"
+                  ></Image>
+                  <p>{session?.user?.name}</p>
+                  <UserInfo onDesktop={false}></UserInfo>
+                </div>
+              ) : (
+                <CtaButtons />
+              )}
             </div>
           </div>
         </div>
@@ -131,16 +144,21 @@ function CtaButtons() {
 }
 
 // The user function will show the user info if logged in.
-function UserInfo({ session }) {
+function UserInfo({ session, onDesktop = true }) {
   return (
     <>
       {/* {session?.user?.name}*/}
-      <Link href={`/add-cars`} className="hover:text-accent">
-        Add Car
-      </Link>
-      <Link href={`/my-bookings`} className="hover:text-accent">
-        My Bookings
-      </Link>
+
+      {onDesktop && (
+        <>
+          <Link href={`/add-cars`} className="hover:text-accent">
+            Add Car
+          </Link>
+          <Link href={`/my-bookings`} className="hover:text-accent">
+            My Bookings
+          </Link>
+        </>
+      )}
       <Link href={`/`} className="hover:text-accent">
         My Added Cars
       </Link>
