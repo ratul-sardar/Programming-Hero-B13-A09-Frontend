@@ -8,6 +8,8 @@ import SecondaryCta from "../CTA Buttons/SecondaryCta/SecondaryCta";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
+import { Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
 
 const links = [
   { label: "Home", href: "/" },
@@ -21,7 +23,9 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   // Toggle Profile Dropdown
   const [showProfile, setShowProfile] = useState(false);
-
+  // Next.js useRouter() Hook
+  const nextRouter = useRouter();
+  // To get User session and its data
   const { data: session } = authClient.useSession();
 
   // TO check if the profile image exsist
@@ -65,7 +69,14 @@ export function Navbar() {
               onClick={() => setShowProfile(!showProfile)}
               className="flex gap-2 items-center cursor-pointer"
             >
-              <Image src={profileImage} width={40} height={40} alt="hi"></Image>
+              <div className="rounded-full overflow-hidden border border-accent">
+                <Image
+                  src={profileImage}
+                  width={40}
+                  height={40}
+                  alt="profile avatar"
+                ></Image>
+              </div>
               <p>{session?.user?.name}</p>
             </button>
           ) : (
@@ -74,8 +85,12 @@ export function Navbar() {
 
           {/* Profile details modal*/}
           {showProfile && (
-            <div className="absolute top-[172%] right-[2%] bg-white p-6 rounded-(--field-radius) flex flex-col gap-3 ">
-              <UserInfo session={session}></UserInfo>
+            <div className="absolute top-[172%] right-[2%] w-[200px] bg-white p-6 rounded-(--field-radius) flex flex-col gap-3 ">
+              <UserInfo
+                session={session}
+                nextRouter={nextRouter}
+                setShowProfile={setShowProfile}
+              ></UserInfo>
             </div>
           )}
         </div>
@@ -110,14 +125,21 @@ export function Navbar() {
             <div className="mt-2 flex gap-3 pt-3">
               {session ? (
                 <div className="flex flex-col gap-2 p-3 ">
-                  <Image
-                    src={profileImage}
-                    width={40}
-                    height={40}
-                    alt="hi"
-                  ></Image>
+                  <div className="rounded-full overflow-hidden border border-accent">
+                    <Image
+                      src={profileImage}
+                      width={40}
+                      height={40}
+                      alt="profile avatar"
+                    ></Image>
+                  </div>
+
                   <p>{session?.user?.name}</p>
-                  <UserInfo onDesktop={false}></UserInfo>
+                  <UserInfo
+                    onDesktop={false}
+                    nextRouter={nextRouter}
+                    setShowProfile={setShowProfile}
+                  ></UserInfo>
                 </div>
               ) : (
                 <CtaButtons />
@@ -144,7 +166,7 @@ function CtaButtons() {
 }
 
 // The user function will show the user info if logged in.
-function UserInfo({ session, onDesktop = true }) {
+function UserInfo({ setShowProfile, onDesktop = true, nextRouter }) {
   return (
     <>
       {/* {session?.user?.name}*/}
@@ -162,9 +184,23 @@ function UserInfo({ session, onDesktop = true }) {
       <Link href={`/`} className="hover:text-accent">
         My Added Cars
       </Link>
-      <Link href={`/`} className="hover:text-accent">
+
+      <Button
+        variant="danger-soft"
+        onClick={async () => {
+          await authClient.signOut({
+            fetchOptions: {
+              onSuccess: () => {
+                nextRouter.push("/login"); // redirect to login page
+              },
+            },
+          });
+
+          setShowProfile(false);
+        }}
+      >
         Logout
-      </Link>
+      </Button>
     </>
   );
 }
