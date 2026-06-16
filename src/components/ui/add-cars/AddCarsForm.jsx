@@ -11,8 +11,13 @@ import {
   InputGroup,
   Label,
   TextField,
+  ListBox,
+  Select,
+  TextArea,
 } from "@heroui/react";
+import { MapPin } from "lucide-react";
 import Router from "next/router";
+import { BsPeople, BsPeopleFill } from "react-icons/bs";
 import { toast } from "react-toastify";
 
 export default function AddCarsForm() {
@@ -20,20 +25,8 @@ export default function AddCarsForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const form = Object.fromEntries(formData);
-    const { name, email, PhotoUrl, password } = form;
 
-    const { data, error } = await authClient.signUp.email({
-      name, // required
-      email, // required
-      password, // required
-      image: PhotoUrl,
-      callbackURL: "/",
-    });
-
-    if (data) {
-      toast.success("Success! Loggin you in.......");
-      Router.push("/");
-    } else toast.error(error.message);
+    console.log(form);
   };
 
   return (
@@ -61,50 +54,116 @@ export default function AddCarsForm() {
         <Label>Daily Rent Price</Label>
         <InputGroup>
           <InputGroup.Prefix>$</InputGroup.Prefix>
-          <InputGroup.Input className="w-full" placeholder="$10/hr" min={`0`} />
+          <InputGroup.Input className="w-full" placeholder="10" min={`0`} />
           <InputGroup.Suffix>/hr</InputGroup.Suffix>
         </InputGroup>
         {/* <Input placeholder="$10/hr" />*/}
         <FieldError />
       </TextField>
 
+      {/* Type of Cars*/}
+      <Select isRequired name="carType" className="w-full" placeholder="Select one">
+        <Label>Car Type</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="SUV" textValue="SUV">
+              SUV
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="Sedan" textValue="Sedan">
+              Sedan
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="Hatchback" textValue="Hatchback">
+              Hatchback
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="Luxury" textValue="Luxury">
+              Luxury
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="Sports" textValue="Sports">
+              Sports
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
+
       {/* Photo Url */}
-      <TextField name="PhotoUrl" type="text">
+      <TextField isRequired name="PhotoUrl" type="text">
         <Label>Photo Url</Label>
         <Input
           placeholder={`https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`}
         />
       </TextField>
 
-      <TextField
-        isRequired
-        minLength={8}
-        name="password"
-        type="password"
-        validate={(value) => {
-          if (value.length < 8) {
-            return "Password must be at least 8 characters";
-          }
-          if (!/[A-Z]/.test(value)) {
-            return "Password must contain at least one uppercase letter";
-          }
-          if (!/[a-z]/.test(value)) {
-            return "Password must contain at least one lowercase letter";
-          }
-          if (!/[0-9]/.test(value)) {
-            return "Password must contain at least one number";
-          }
-
-          return null;
-        }}
-      >
-        <Label>Password</Label>
-        <Input placeholder="Enter your password" />
-        <Description>
-          Must be at least 8 characters with 1 uppercase and 1 number
-        </Description>
+      {/* Seat Capacity*/}
+      <TextField isRequired name="seatCapacity" type="number">
+        <Label>Seat Capacity</Label>
+        <InputGroup>
+          <InputGroup.Prefix>
+            <BsPeopleFill />
+          </InputGroup.Prefix>
+          <InputGroup.Input
+            className="w-full"
+            placeholder="3"
+            min={`0`}
+            max={`15`}
+          />
+          <InputGroup.Suffix>Peoples</InputGroup.Suffix>
+        </InputGroup>
         <FieldError />
       </TextField>
+
+      {/* Pickup Location*/}
+      <TextField isRequired name="pickupLocation" type="text">
+        <Label>Pickup Location</Label>
+        <InputGroup>
+          <InputGroup.Prefix>
+            <MapPin />
+          </InputGroup.Prefix>
+          <InputGroup.Input className="w-full" placeholder="Dhaka, Gulshan" />
+        </InputGroup>
+        <FieldError />
+      </TextField>
+
+      {/* Description*/}
+      <Label htmlFor="Description">Description (Tell us about your car)</Label>
+      <TextArea
+        isRequired
+        id="Description"
+        name="description"
+        aria-label="Description"
+        className="w-full"
+        rows={3}
+        placeholder="A reliable and fuel-efficient..."
+      />
+
+      {/* Availability Status*/}
+      <Select isRequired name="availabilityStatus" className="w-full" placeholder="Select one">
+        <Label>Availability Status</Label>
+        <Select.Trigger>
+          <Select.Value />
+          <Select.Indicator />
+        </Select.Trigger>
+        <Select.Popover>
+          <ListBox>
+            <ListBox.Item id="Available" textValue="Available">
+              Available
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+            <ListBox.Item id="NotAvailable" textValue="Not Available">
+              Not Available
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          </ListBox>
+        </Select.Popover>
+      </Select>
 
       <div className="flex gap-2">
         <Button type="submit">
