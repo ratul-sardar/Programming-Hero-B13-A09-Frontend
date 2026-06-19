@@ -4,7 +4,7 @@ export async function getAllCars(search = "", type = "") {
   if (type) quary.append("type", type);
 
   const res = await fetch(
-    `${process.env.SERVER_URI}/explore-cars?${quary.toString()}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URI}/explore-cars?${quary.toString()}`,
     {
       method: "GET",
       headers: {
@@ -19,7 +19,7 @@ export async function getAllCars(search = "", type = "") {
 
 // To get data of a single cars
 export async function getCarData(id) {
-  const res = await fetch(`${process.env.SERVER_URI}/explore-cars/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/explore-cars/${id}`);
   const data = await res.json();
   return data;
 }

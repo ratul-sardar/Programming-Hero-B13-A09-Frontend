@@ -1,7 +1,6 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-// import { Check } from "@gravity-ui/icons";
+import { addCar } from "@/lib/actions/addCar";
 import {
   Button,
   Description,
@@ -15,8 +14,7 @@ import {
   Select,
   TextArea,
 } from "@heroui/react";
-import { MapPin } from "lucide-react";
-import Router from "next/router";
+import { AwardIcon, MapPin } from "lucide-react";
 import { BsPeople, BsPeopleFill } from "react-icons/bs";
 import { toast } from "react-toastify";
 
@@ -24,9 +22,14 @@ export default function AddCarsForm() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const form = Object.fromEntries(formData);
 
-    console.log(form);
+    try {
+      const result = await addCar(formData);
+      toast.success("Car added successfully!");
+      e.target.reset();
+    } catch (error) {
+      toast.error(error.message || "Failed to add car");
+    }
   };
 
   return (
@@ -62,7 +65,12 @@ export default function AddCarsForm() {
       </TextField>
 
       {/* Type of Cars*/}
-      <Select isRequired name="carType" className="w-full" placeholder="Select one">
+      <Select
+        isRequired
+        name="carType"
+        className="w-full"
+        placeholder="Select one"
+      >
         <Label>Car Type</Label>
         <Select.Trigger>
           <Select.Value />
@@ -135,7 +143,7 @@ export default function AddCarsForm() {
       {/* Description*/}
       <Label htmlFor="Description">Description (Tell us about your car)</Label>
       <TextArea
-        isRequired
+        // isRequired
         id="Description"
         name="description"
         aria-label="Description"
@@ -145,7 +153,12 @@ export default function AddCarsForm() {
       />
 
       {/* Availability Status*/}
-      <Select isRequired name="availabilityStatus" className="w-full" placeholder="Select one">
+      <Select
+        isRequired
+        name="availabilityStatus"
+        className="w-full"
+        placeholder="Select one"
+      >
         <Label>Availability Status</Label>
         <Select.Trigger>
           <Select.Value />
