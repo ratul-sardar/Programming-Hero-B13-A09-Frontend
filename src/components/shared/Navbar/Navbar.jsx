@@ -34,7 +34,7 @@ export function Navbar() {
     if (session.user.image && !session?.user?.image == "")
       profileImage = session.user.image;
 
-  console.log(session);
+  // console.log(session);
   // console.log(session.user.name);
 
   return (
@@ -169,8 +169,6 @@ function CtaButtons() {
 function UserInfo({ setShowProfile, onDesktop = true, nextRouter }) {
   return (
     <>
-      {/* {session?.user?.name}*/}
-
       {onDesktop && (
         <>
           <Link href={`/add-cars`} className="hover:text-accent">
@@ -181,7 +179,7 @@ function UserInfo({ setShowProfile, onDesktop = true, nextRouter }) {
           </Link>
         </>
       )}
-      <Link href={`/`} className="hover:text-accent">
+      <Link href={`/my-added-cars`} className="hover:text-accent">
         My Added Cars
       </Link>
 
