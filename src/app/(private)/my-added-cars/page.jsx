@@ -3,8 +3,9 @@ import { headers } from "next/headers";
 
 export default async function MyAddedCars() {
   // Getting the userId
-  const { session } = await auth.api.getSession({ headers: await headers() });
-  const userId = await session?.id;
+  const { user } = await auth.api.getSession({ headers: await headers() });
+  const userId = await user?.id;
+  console.log("The userId we are getting by the server component is: ", userId);
 
   //Fetching the data
   const res = await fetch(
