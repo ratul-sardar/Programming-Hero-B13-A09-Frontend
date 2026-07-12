@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { Button, Card } from "@heroui/react";
 import { headers } from "next/headers";
 import SafeImage from "@/components/shared/SafeImage/SafeImage";
+import { EditCarsModal } from "@/components/ui/my-added-cars/EditCarsModal";
 
 export default async function MyAddedCars() {
   // Getting the userId
@@ -15,22 +16,21 @@ export default async function MyAddedCars() {
   );
   const myAddedCars = await res.json();
 
-  console.log(myAddedCars);
-
   return (
     <>
       <section className="">
         <div className="cssContainer flex flex-col gap-16">
           <h1 className="text-center">List of Cars Added by You</h1>
 
-          {(myAddedCars.lenght > 0) ? <div className="grid grid-cols-2 gap-6 w-fit mx-auto">
+          {(myAddedCars.length > 0) ? <div className="grid grid-cols-2 gap-6 w-fit mx-auto">
             {myAddedCars.map((car) => (
               <Card key={`${car?._id}`} className="flex flex-row border border-gray-500/10 bg-white gap-6">
                 <div className="aspect-4/3 max-w-[320px] overflow-hidden bg-muted">
                   <SafeImage
                     src={car?.PhotoUrl}
                     alt={car?.carName || "Car Image"}
-                    fill
+                    width={120}
+                    height={120}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500"
                   />
@@ -42,7 +42,7 @@ export default async function MyAddedCars() {
                   <Card.Description className="text-blue-700">{car.availabilityStatus}</Card.Description>
                 </Card.Header>
                 <Card.Content className="flex-row gap-4">
-                  <Button variant="outline">Edit Car Info</Button>
+                  <EditCarsModal></EditCarsModal>
                   <Button variant="danger">Delete</Button>
                 </Card.Content>
                 </div>
